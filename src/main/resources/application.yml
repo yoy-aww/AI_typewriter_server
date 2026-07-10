@@ -1,0 +1,29 @@
+server:
+  port: 8080
+  tomcat:
+    async-request-timeout: 300000  # 5 minutes
+
+# DeepSeek API Configuration
+deepseek:
+  api-key: ${DEEPSEEK_API_KEY}
+  api-url: https://token.sensenova.cn/v1/chat/completions
+  model: deepseek-v4-flash
+  max-tokens: 2048
+  connect-timeout: 30
+  read-timeout: 120
+  max-conversation-rounds: 20
+
+# Async thread pool for SSE streaming tasks
+spring:
+  task:
+    execution:
+      pool:
+        core-size: 4
+        max-size: 16
+        queue-capacity: 100
+        keep-alive: 60s
+      thread-name-prefix: sse-worker-
+
+logging:
+  level:
+    com.typewriter: DEBUG
